@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "001. Variables and Bindings"
-date:   2014-12-19 19:12:32
+date:   2015-01-04 11:25:05
 categories: Programming Languages
 ---
 <p align="justify">
@@ -85,4 +85,3 @@ In the upcoming posts we will dig into this definitions. The very important thin
 after that the definition should be type checked at some point and lastly we should consider the evaluation strategy.
 These operations and how they are done roughly determine the behaviour of the underlying programming language.
 
-  
