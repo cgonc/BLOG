@@ -31,13 +31,17 @@ A variable which is an each of type contains t1,t2,t3,..., and tn at the same ti
 # One-of-type #
 <p align="justify">
 A variable which is one-of-type holds one of the t1,t2,...or tn, so a one-of-type has only one type 
-during the life-cycle of the program but the type it holds can change. Functional languages can cope
-with this type using option. For example lets find the prime numbers between two numbers. If there is 
+during the life-cycle of the program but the type it holds can change. One of the ways that functional languages can cope
+with this kind of type is using options. 
+<br>
+<br>
+For example lets find the prime numbers between two numbers using SML language. If there is 
 a prime number or some prime numbers between these two numbers we should return those integer values 
-as list but if there is not we should return a NONE value. So our return type either includes a NONE type 
-or some integer list. 
-This is a good example of a one-of-type.
+as list but if there is not we should return a NONE value. 
 </p>
+
+> So our return type either includes a NONE type  or SOME Int List. 
+This is a good example of a one-of-type.
 
 {% highlight  java%}
 fun is_prime (n) = 
@@ -60,7 +64,7 @@ fun is_prime (n) =
 		if (n mod 2) = 0
 		then false
 		else
-		    helper (floor ( Math.sqrt(Real.fromInt n) ) )
+		    helper (floor ( Math.sqrt(Real.fromInt n) + 1.0 ) )
     end
 
 fun get_prime_between (start , stop) =
@@ -81,9 +85,9 @@ fun get_prime_between (start , stop) =
 {% endhighlight %}
 
 <p align="justify">
-In the above example the return type of get_prime_between function can be NONE or SOME int list. It can hold one type and that 
+In the above example the return type of get_prime_between function can be NONE or SOME Int List. It can hold one type and that 
 one type can vary between these two like an or statement.
-At some sense logical and operator may be associated with a product operator and logical or operator may be associated with a sum operator.
+At some sense, logical and operator may be associated with a product operator and logical or operator may be associated with a sum operator.
 Maybe the naming comes from this.
 </p>
 
@@ -97,3 +101,4 @@ val it = SOME [131] : int list option
 - get_prime_between(132,140);
 val it = SOME [139,137] : int list option
 {% endhighlight %}
+
