@@ -5,7 +5,7 @@ date:   2014-12-30 18:56:32
 categories: Programming Languages
 ---
 <p align="justify">
-The post includes some simple functions which is written in Scala language.
+This post includes some simple functions which is written in Scala language.
 </p>
 
 {% highlight Scala %}

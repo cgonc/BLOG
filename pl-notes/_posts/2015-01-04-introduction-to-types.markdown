@@ -102,3 +102,10 @@ val it = SOME [131] : int list option
 val it = SOME [139,137] : int list option
 {% endhighlight %}
 
+# Self-reference-type #
+<p align="justify">
+This kind of type allows to describe recursive data structures. For instance a tree structures
+which includes integer values for its nodes can be one of two types which is an int and
+a tree itself. In functional paradigms as far as I can see it is common to represent lists
+as trees. For example int list 
+</p>
