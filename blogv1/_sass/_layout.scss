@@ -169,13 +169,13 @@
     font-size: 20px;
 }
 
-.post-list {
-    margin-left: 0;
-    list-style: none;
+.post-main-description {
+    font-size: 15px;
+}
 
-    > li {
-        margin-bottom: $spacing-unit;
-    }
+.post-list {
+    margin-left: 5;
+    list-style: none;
 }
 
 .post-meta {
@@ -185,10 +185,15 @@
 
 .post-link {
     display: block;
-    font-size: 24px;
+    font-size: 14px;
 }
 
-
+.post-box {
+	display: inline-block;
+	width: -webkit-calc(100% - (#{$spacing-unit} / 2));
+	height: 100px;
+	margin: 1em;
+}
 
 /**
  * Posts

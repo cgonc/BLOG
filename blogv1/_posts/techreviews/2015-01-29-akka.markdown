@@ -1,0 +1,11 @@
+---
+layout: post
+title:  "001. Akka Adventures"
+date:   2015-01-29 23:46:05
+categories: Tech-Notes
+---
+<p align="justify">
+Although it seems the simplest concept in programming languages, there are lots of concepts to be thought of when researching variables and bindings. 
+There should be a large amount of abstraction when examining variables and bindings because if someone digs deep and goes to lower levels of abstraction, 
+he/she will encounter memory address abstraction which vary widely among the underlying computer architecture and among the programming language on top of it.
+</p>

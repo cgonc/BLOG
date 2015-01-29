@@ -2,7 +2,7 @@
 layout: post
 title:  "007. Case Expressions"
 date:   2015-01-17 10:18:05
-categories: Programming Languages
+categories: Programming-Languages
 ---
 # Some Examples of One-of Types in SML #
 
