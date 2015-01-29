@@ -6,7 +6,7 @@ categories: Programming Languages
 ---
 
 <p align="justify">
-Representing lists as a recursive date type is very common in functional languages. By representing
+Representing lists as a recursive data type is very common in functional languages. By representing
 lists as recursive, functions that traverse the lists can be written very easily.
 </p>
 
