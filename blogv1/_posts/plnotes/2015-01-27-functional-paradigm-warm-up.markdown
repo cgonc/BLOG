@@ -122,6 +122,37 @@ fn y => tl y
 # Map and Filter #
 
 {% highlight sml %}
+(*
+Simple map and filter implementations
+*)
 
+fun map (f, xs) =
+    case xs of
+	[] => []
+      | x::xs' => (f x) :: map (f,xs')
+
+fun filter (f, xs) =
+    case xs of
+	[] => []
+      | x::xs' => if f x 
+		  then  x :: filter (f, xs')
+		  else filter (f, xs')
+
+val x1 = [1,2,3,4,5]
+val x2 = map ((fn y => y * 2), x1)
+val x3 = map ((fn y => y + 2), x1)
+val x4 = filter ((fn y => y < 2), x1)
+
+(*---EVALUATION---*)
+val map = fn : ('a -> 'b) * 'a list -> 'b list
+val filter = fn : ('a -> bool) * 'a list -> 'a list
+val x1 = [1,2,3,4,5] : int list
+val x2 = [2,4,6,8,10] : int list
+val x3 = [3,4,5,6,7] : int list
+val x4 = [1] : int list
+val it = () : unit
 
 {% endhighlight %}
+<p align="justify">
+It is really powerful for a language that makes your variables automatically generic for you.
+</p>

@@ -107,5 +107,16 @@ val it = SOME [139,137] : int list option
 This kind of type allows to describe recursive data structures. For instance a tree structures
 which includes integer values for its nodes can be one of two types which is an int and
 a tree itself. In functional paradigms as far as I can see it is common to represent lists
-as trees. For example int list 
+as trees. Here is an example of a basic self-reference-type.  
 </p>
+
+{% highlight  sml%}
+(*
+The datatype my_int_list can be of type empty or it can be a pair which is an int 
+paired with of type my_int_list.
+*)
+datatype my_int_list = Empty | Cons of int * my_int_list
+					 
+val one_two_three = Cons(1,Cons(2,Cons(3,Empty)))
+
+{% endhighlight %}
