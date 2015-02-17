@@ -1,0 +1,77 @@
+---
+layout: post
+title:  "Closures"
+date:   2015-02-15 10:26:05
+categories: Programming-Languages
+---
+
+# Closures #
+
+<p align="justify">
+A closure is a closed language construct which has two parts, the code for the function
+and the environment that was current when we created the function. It is like an ML pair,
+just something with two parts however you can not access the parts of the pair separately.
+All you can do is call the function. Lets define a closure in Java.
+</p>
+{% highlight  java%}
+
+public interface IClosure {	
+	public void callMe();
+}
+
+public class Main {
+	public static void main(String[] args) {
+		 
+		IClosure aClosure = new IClosure() {
+			int x = 1;
+			@Override
+			public void callMe() {
+				x += 1;
+				System.out.println("x : " + x);
+				
+			}
+		};
+		
+		// First call and it prints 2.
+		aClosure.callMe();
+		
+		// Second call and it prints 3!!!
+		// The closure is changing its environment (x) when called. 
+		aClosure.callMe();
+	}
+}
+
+//*--THE OUTPUT--*//
+x : 2
+x : 3
+
+{% endhighlight %}
+
+As it is mentioned all you can do is call the closure. You can not access it is environment but the
+function in it has the capability of changing this special environment. In Java you need an interface 
+to define a closure. In javascript it seems more natural.
+
+{% highlight  javascript%}
+var closure = ( function () {
+    var x = 1;
+    
+    function callMe() {
+        x = x + 1;
+        console.log("x : " + x);
+    }
+    return callMe;
+} ) ();
+
+// First call and it prints 2
+closure();
+// Second call and it prints 3!!!
+// The closure is changing its environment. 
+closure();
+
+//THE OUTPUT
+x : 2
+x : 3
+
+{% endhighlight %}
+
+In later posts I will mention about memoization, callbacks, thunks and streams which are all implementations of closures.

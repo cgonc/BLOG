@@ -1,9 +1,12 @@
 ---
 layout: post
-title:  "007. Case Expressions"
+title:  "Case Expressions"
 date:   2015-01-17 10:18:05
 categories: Programming-Languages
 ---
+
+Before explaining the case expressions, let's consider some useful examples of one-of-types in SML. 
+
 # Some Examples of One-of Types in SML #
 
 {% highlight  sml%}
@@ -55,6 +58,7 @@ testing which variant we had (null or isSome) and functions for getting the piec
 raised exceptions if given arguments of the wrong variant
 
 <p align="justify">
+After reading this notes I wonder how SML implements hd tand tl functions. 
 So I look at the implementation code in SML and I see something very interesting. Here is what I see 
 when I look basic list implementations.
 </p>
@@ -73,13 +77,13 @@ fun tl (_ :: t) = t
 {% endhighlight %}
 
 <p align="justify">
-The hd implementation use some kind of pattern matching. When the variable bind this pattern ,
+The hd implementation use some kind of pattern matching. When the variable bind to this pattern ,
 the underlying language implementation (I guess) can extract the data out of it. 
-
+<br><br>
 Pattern matching is something that is implemented on the underlying programming language. Case
 expressions is an implementation of pattern matching. With case expressions we can check the 
 variant and if its pattern matches with the following case expression we can extract the data
-out of it. Case expressions are one of the powerful tools for the language user since :
+out of it. Case expressions are powerful since :
 </p>
 
 1. The language user can never mess up and try to extract something from the wrong variant.
@@ -88,9 +92,17 @@ out of it. Case expressions are one of the powerful tools for the language user 
 
 
 <p align="justify">
-I think the example that will be given below is important. It is a very very simple language 
-construct which can execute arithmetic expressions. Lets dig in.
+Let's use case expressions in two beautiful examples. 
+I think the first example that will be given below is important. 
+In my personal opinion this example can be thought
+of a very simple language which can execute simple arithmetic operations. The operations are type checked
+and then assigned on to variables and than evaluated. The type of exp is a recursive data type. It can
+naturally be thought as a tree. I think it is beautiful and simple. 
 </p>
+
+ * __eval__ function is for evaluating an expression
+ * __fetch_constants__ function returns the list of all the constants in an expression tree.
+ * __has_mult__ function indicates whether there is at least one multiplication in the expression. 
 
 {% highlight  sml%}
 
@@ -157,6 +169,13 @@ fun has_mult e =
 <p align="justify">
 We can also use nested case expressions. Here is an example.
 </p>
+ * __oper__ datatype is a one-of-type which can be a mult or an add
+ * __tree__ datatype is also a one-of-type which can be a _Node_ of a tuple of _(oper * tree * tree)_ __OR__
+   a _Leaf_ of an __integer__
+ * __oper_to_string__ function takes an operation and returns the string representation of it.
+ * __print_tree__ prints the expression tree
+ * __eval_tree__ function can evaluate the expression to its integer result where nested case expression is 
+ used.
 
 {% highlight  sml%}
 

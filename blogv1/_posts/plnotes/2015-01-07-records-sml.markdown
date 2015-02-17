@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "006. Records in SML"
+title:  "Records in SML"
 date:   2015-01-07 21:42:05
 categories: Programming-Languages
 ---
@@ -20,9 +20,7 @@ val it = () : unit
 {% endhighlight %}
 
 <p align="justify">
-Records is a powerful future of SML language. 
-<br>
-<br>
+Record is a powerful future of SML language. 
 Records like tuples can hold different types. The only difference is they hold the data by name.
 It is somewhat similar to Map implementations in Java.
 </p>
@@ -32,7 +30,7 @@ val record1 = {name = "CAGLAR", surname = "GONUL", age = 34, gender = "MALE"}
 {% endhighlight %}
 
 <p align="justify">
-A record is also an example of each-of-type like a tuple. We can access the elements of a record by name like #name record1.
+A record is also an example of an each-of-type like a tuple. We can access the elements of a record by name like #name record1.
 A tuple is in fact a record. That is, all the syntax for tuples is just a convenient way to write down and use records.
 You can see it from the way of accessing elements in a tuple. We access the elements in a tuple like #1 tuple1.
 So they are the same.

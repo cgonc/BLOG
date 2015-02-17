@@ -1,21 +1,20 @@
 ---
 layout: post
-title:  "001. Variables and Bindings"
+title:  "Introduction to Variables and Bindings"
 date:   2014-12-19 11:25:05
 categories: Programming-Languages
 ---
 <p align="justify">
 Although it seems the simplest concept in programming languages, there are lots of concepts to be thought of when researching variables and bindings. 
-There should be a large amount of abstraction when examining variables and bindings because if someone digs deep and goes to lower levels of abstraction, 
-he/she will encounter memory address abstraction which vary widely among the underlying computer architecture and among the programming language on top of it.
-</p>
+It is natural that there is a large amount of abstraction when examining this concept.</p>
 <p align="justify">
 So basically a variable is a symbolic name under the abstraction of a memory location. 
 Under the concept of the programming language paradigm we can see two distinct behaviours :
 
 </p>
 1. Imperative Languages : Created variables can be accessed or changed during their lifetime.
-2. Pure Functional Languages: There is no mutation. Variables are bound to a single expression and keep a single value during their entire lifetime.
+2. Pure Functional Languages: There is no mutation. Variables are bound to a single expression 
+and keep a single value during their entire lifetime and also functions are treated as variables.
 
 So in an imperative language like java the following code produces 
 
@@ -63,6 +62,13 @@ public class WhyNotMutate {
 My idea is **Integer y = x** is a syntactic sugar for Integer y = new Integer(x). So it produces a new variable.
 
 <p align="justify">
+The type system determines the behaviour of variables and bindings but one can not generalize the overall
+behaviour with straight lines since even if two languages has the same typing model, the behaviour can 
+be different in the underlying language implementation.
+Type system can be strong (Java) or weak (C), can be static (Java) or dynamic (Ruby)
+I will document the type system exclusively
+in my later posts. But as an example I can talk about ML.
+<br><br>
 ML has a strong static type system. An ML program is a sequence of bindings. Each binding gets type-checked and then evaluated. 
 What type a binding has, depends on a static environment. A static environment is roughly the types of the preceding bindings in the file.
 How a binding is evaluated depends on a dynamic environment. A dynamic environment can be described as the values of the preceding bindings in the file.
@@ -81,7 +87,7 @@ A very simple programming language can be described by the following definitions
 * Functions
 * Function calls
 
-In the upcoming posts we will dig into this definitions. The very important thing in these definitions is we first examine the syntax and 
+In the upcoming posts I will dig into this definitions. The very important thing in these definitions is we first examine the syntax and 
 after that the definition should be type checked at some point and lastly we should consider the evaluation strategy.
 These operations and how they are done roughly determine the behaviour of the underlying programming language.
 

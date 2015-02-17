@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "008. Truth about Lists"
+title:  "Truth about Lists"
 date:   2015-01-23 15:49:05
 categories: Programming-Languages
 ---

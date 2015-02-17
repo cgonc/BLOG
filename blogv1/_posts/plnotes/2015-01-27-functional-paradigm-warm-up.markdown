@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "009. Functional Paradigm Warm-up"
+title:  "Functional Paradigm Warm-up"
 date:   2015-01-27 10:16:05
 categories: Programming-Languages
 ---
@@ -8,8 +8,7 @@ categories: Programming-Languages
 <p align="justify">
 First class or first class citizen means that functions can be treated as variables. They can
 be passed to other functions, returned from functions, assigned like variables.
-Function closures basically includes a function body and an environment which the function body
-can modify and is a very powerful thing. Higher-order function just refers to a function that
+Higher-order function just refers to a function that
 takes or returns other functions.
 </p>
 
@@ -31,7 +30,7 @@ $$f(3) = ? $$
 </div>
 
 <p align="justify">
-This simple math expression can be ported to sml. However when we port it to sml
+This simple math expression can be ported to sml. However when I port it to sml
 I realize I wrote a more general purpose function definition. The definition of f 
 can be used for any function not just g like so: 
 </p>
@@ -60,11 +59,18 @@ val it = () : unit
 {% endhighlight %}
 
 <p align="justify">
-It is not easy and as natural as SML, defining a function like f in an imperative language. 
-More examples can be noted as.
+It is not as easy and as natural as it is in SML, defining a function like f in an imperative language. 
+More examples can be given in SML language.
 </p>
 
-{% highlight sml %}
+ * __n_times__ function takes a function and two integers. Calls the function f  decrementing n
+  over and over till the integer reaches zero. like so f(f(f(f(f(f(x))))))
+  
+This one is mind bending but after understanding how it works it is beautiful.
+
+
+{% highlight java %}
+
 fun n_times (f,n,x) =
     if n=0
     then x
@@ -79,13 +85,14 @@ fun increment x = x+1
 val x2 = n_times(increment,4,7) (* answer: 11 *)
 
 val x3 = n_times(tl,2,[4,8,12,16]) (* answer: [12,16] *)
+
 {% endhighlight %}
 
 # Anonymous Functions #
 
 <p align="justify">
 Functional languages always have a way of defining anonymous functions. Here is a simple
-example for it.
+example for it in SML.
 </p>
 
 {% highlight java %}
@@ -120,8 +127,9 @@ fn y => tl y
 {% endhighlight %}
 
 # Map and Filter #
+Simple map and filter implementations in SML language.
 
-{% highlight sml %}
+{% highlight java %}
 (*
 Simple map and filter implementations
 *)
@@ -134,7 +142,7 @@ fun map (f, xs) =
 fun filter (f, xs) =
     case xs of
 	[] => []
-      | x::xs' => if f x 
+      | x::xs' => if(f x) 
 		  then  x :: filter (f, xs')
 		  else filter (f, xs')
 
@@ -154,5 +162,127 @@ val it = () : unit
 
 {% endhighlight %}
 <p align="justify">
+When observing the evaluation of map function one can see its type which takes a function whose type is 
+( take any type of and return any type of b) , and (a list type of a) and returns a list type of b.
 It is really powerful for a language that makes your variables automatically generic for you.
 </p>
+
+# Fold #
+
+Fold is also a very popular function in functional paradigm. Generally its idea is 
+traverse a recursive data structure onto an accumulator.
+
+{% highlight sml %}
+(*
+Fold implementations
+*)
+
+fun fold (f, acc, xs) =
+    case xs of 
+	[] => acc
+      | x::xs' => fold (f, f(acc,x) , xs')
+
+val x = [1,2,3,4,5]
+val max = fold ((fn (acc,x) => if x > acc then x else acc),hd x, x)
+val sum = fold ((fn (acc,x) => x + acc), 0, x)
+val product = fold ((fn (acc,x) => x * acc) ,1 ,x) 
+{% endhighlight %}
+
+# Function Composition #
+
+Function composition is also very common in functional paradigm.
+o operator is a syntactic sugar for concatenating function calls.
+It seems handy. 
+
+ * __compose__ The basic idea can be seen in this function. It takes two functions as a parameter 
+   and returns a function which takes an argument x and returns a f ( g x ) so for example : 
+   this call (fn x=> x * 2, fn y => y + 4) has a value which is equivalent to a function 
+   which increments its parameter by four and double the result.
+ * __sqrt_of_abs__ and __sqrt_of_abs_equals__ functions has the same value.
+ * __sqrt_of_abs_cur__ is the curried form of it.
+
+{% highlight sml %}
+(*
+Function compositon examples
+*)
+
+fun compose (f,g) = fn x => f (g x)
+fun sqrt_of_abs i = Math.sqrt (Real.fromInt (abs i))
+
+(*Equals*)
+fun sqrt_of_abs_equals i = (Math.sqrt o Real.fromInt o abs ) i
+
+(*Curied form*)
+val sqrt_of_abs_cur = Math.sqrt o Real.fromInt o abs 
+
+infix |> (* tells the parser |> is a function that appears between its two arguments *)
+fun x |> f = f x
+fun sqrt_of_abs_readable i = i |> abs |> Real.fromInt |> Math.sqrt
+{% endhighlight %}
+
+# Currying and Partial Application #
+
+Currying form is common in functional paradigm. Since functions are treated as ordinary variables we can assign 
+an anonymous function to a variable. I think with the curried form we have more options when defining functions
+ 
+ * __fold__ is the curried form of fold.
+ * Since we have the curried form of fold in our hand, we can easily define a sum function 
+   which gives the summation of an integer list from that definition, and also a product function 
+   which gives the product of an integer list.
+ 
+
+{% highlight sml %}
+(*
+Currying and Partial Application Examples
+*)
+
+val sorted3 = fn x => fn y => fn z => z >= y andalso y >= x
+
+val isSorted = sorted3 3 4 5
+
+(*
+Curried form of fold
+*)
+
+fun fold f = fn acc => fn xs => 
+		case xs of
+		    [] => acc
+		  | x::xs' => fold f (f(acc,x)) xs'
+
+(*
+We are now more elastic. 
+For instance we can define a sum and a product variable like so
+*)
+val sum = fold (fn (acc,x) => x + acc) 0
+val product = fold (fn (acc,x) => x * acc) 1
+
+val x_sum = sum [1,2,3,4,5]
+val x_product = product [1,2,3,4,5]
+
+(*
+Syntactic sugar for defining curried functions
+*)
+
+fun fold_s f acc xs =
+    case xs of
+	[] => acc
+      | x::xs' => fold_s f (f(acc,x)) xs'
+
+ 
+(*
+More examples
+*)
+
+fun zip xs ys =
+    case (xs,ys) of
+	([],[]) => []
+      | (x::xs',y::ys') => (x,y) :: (zip xs' ys')
+      | _ => raise Empty
+
+fun range i j = if i > j then [] else i :: range (i+1) j
+
+val countup = range 1
+
+fun duplicate_number_list xs = zip (countup (length xs)) xs
+
+{% endhighlight %}

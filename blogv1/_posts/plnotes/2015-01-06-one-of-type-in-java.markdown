@@ -1,12 +1,14 @@
 ---
 layout: post
-title:  "005. Implementing One-of-type in Java"
+title:  "Implementing One-of-type in Java"
 date:   2015-01-06 16:40:05
 categories: Programming-Languages
 ---
 <p align="justify">
 In object oriented programming one of types can be implemented using subclassing.
-Consider this very simple scala function.
+Consider this very simple Scala function. The return type of the max function is
+a one-of-type. It can be either none or an integer depending whether there is a 
+maximum or not.
 </p>
 {% highlight  scala%}
 def max(xs: List[Int]): Option[Int] = {
@@ -21,19 +23,19 @@ def max(xs: List[Int]): Option[Int] = {
 {% endhighlight %}
 
 <p align="justify">
-We can port this simple scala function into Java.
+We can port this simple Scala function into Java.
 <br>
 <br>
 We need an Option class. We can define None and Some as the subclass of this
 Option class so we can pass any of the two types whenever we want. 
-I think it is one of the examples of polymorphism. We can pass one of the two 
+It is one of the examples of polymorphism. We can pass one of the two 
 sub-type to a super type.
 </p>
 
 {% highlight  java%}
 /**
  * A very simple solution for implementing one-of-types in Java
- * A more detailed solution can be found at scala package
+ * A more detailed solution can be found at Scala package
  *
  * @param <T>
  */

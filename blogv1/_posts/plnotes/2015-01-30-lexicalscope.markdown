@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "010. Lexical Scope"
+title:  "Lexical Scope"
 date:   2015-01-30 10:26:05
 categories: Programming-Languages
 ---
-What does it mean :
+What does it mean ?
  
 > The body of a function is evaluated in the environment where the function is defined, 
 not the environment where the function is called.
@@ -25,8 +25,8 @@ val z = f (x+y)        (*    z = f(5)  *)
 val z = 6 : int
 {% endhighlight %}
 
-In a language like sml f always increments its parameter by one because the value of x is one at
-the moment where it is defined.
+In a language like sml __f always increments its parameter by one__ because the value of x is one __at
+the moment where it is defined.__
 
 Lets write the same example in javascript.
 
@@ -44,20 +44,22 @@ console.log('z : ' + z )
 z : 7
 {% endhighlight %}
 
-In javascript the situation is different. The value of f is evaluated when it is called.
+In javascript the situation is different. __The value of f is evaluated when it is called.__
 At the time of the call the value of x equals 2 so f is a function which increments its parameter
-by two. 
+by two.
 
-# Closures #
+__So the same example which is written in Javascript evaluates z to 7 instead of 6__
 
-<p align="justify">
-A closure is a closed language construct which has two parts, the code for the function
-and the environment that was current when we created the function. It is like an ML pair,
-just something with two parts however you can not access the parts of the pair separately.
-All you can do is call the function.
-</p>
+So If any one reading this part, I am in a dilemma. According to the teacher's notes Javascript should be
+dynamically scoped. But Javascript is lexically scoped. I searched SO for a while and came accross this
+link <http://stackoverflow.com/questions/19622805/lexical-scope-in-python-vs-ml> .
 
-Another example :
+Any-ways in a dynamically scoped language you just have one current environment and you use it to 
+evaluate function bodies. In a lexically scoped language your evaluations take place lexically where 
+your bindings take place. In my personal opinion writing with a lexically scope language is easier and
+more traceable.
+
+Here is another example for lexical scope in SML .
 
 {% highlight  sml%}
 
@@ -67,9 +69,9 @@ Example 1
 val x = 1
 fun f y =
     let
-	val x = y+1
+	 val x = y+1
     in
-	fn z => x + y + z
+	 fn z => x + y + z
     end
 val x = 3
 val g = f 4
@@ -89,210 +91,7 @@ EVALUATION
 6. z = 9 + 6 = 15 
 *)
 {% endhighlight %}
-
-# Fold #
-
-Fold is also a very popular function in functional paradigm. Generally its idea is 
-traverse a recursive data structure onto an accumulator.
-
-{% highlight sml %}
-(*
-Fold implementations
-*)
-
-fun fold (f, acc, xs) =
-    case xs of 
-	[] => acc
-      | x::xs' => fold (f, f(acc,x) , xs')
-
-val x = [1,2,3,4,5]
-val max = fold ((fn (acc,x) => if x > acc then x else acc),hd x, x)
-val sum = fold ((fn (acc,x) => x + acc), 0, x)
-val product = fold ((fn (acc,x) => x * acc) ,1 ,x) 
-{% endhighlight %}
-
-# Function Composition #
-
-Function composition is also very common in functional paradigm.
-
-{% highlight sml %}
-(*
-Function compositon examples
-*)
-
-fun compose (f,g) = fn x => f (g x)
-fun sqrt_of_abs i = Math.sqrt (Real.fromInt (abs i))
-
-(*Equals*)
-fun sqrt_of_abs_equals i = (Math.sqrt o Real.fromInt o abs ) i
-
-(*Curied form*)
-val sqrt_of_abs_cur = Math.sqrt o Real.fromInt o abs 
-
-infix |> (* tells the parser |> is a function that appears between its two arguments *)
-fun x |> f = f x
-fun sqrt_of_abs_readable i = i |> abs |> Real.fromInt |> Math.sqrt
-{% endhighlight %}
-
-# Currying and Partial Application #
-
-{% highlight sml %}
-(*
-Currying and Partial Application Examples
-*)
-
-val sorted3 = fn x => fn y => fn z => z >= y andalso y >= x
-
-val isSorted = sorted3 3 4 5
-
-(*
-Curried form of fold
-*)
-
-fun fold f = fn acc => fn xs => 
-		case xs of
-		    [] => acc
-		  | x::xs' => fold f (f(acc,x)) xs'
-
-(*
-We are now more elastic. 
-For instance we can define a sum and a product variable like so
-*)
-val sum = fold (fn (acc,x) => x + acc) 0
-val product = fold (fn (acc,x) => x * acc) 1
-
-val x_sum = sum [1,2,3,4,5]
-val x_product = product [1,2,3,4,5]
-
-(*
-Syntactic sugar for defining curried functions
-*)
-
-fun fold_s f acc xs =
-    case xs of
-	[] => acc
-      | x::xs' => fold_s f (f(acc,x)) xs'
-
- 
-(*
-More examples
-*)
-
-fun zip xs ys =
-    case (xs,ys) of
-	([],[]) => []
-      | (x::xs',y::ys') => (x,y) :: (zip xs' ys')
-      | _ => raise Empty
-
-fun range i j = if i > j then [] else i :: range (i+1) j
-
-val countup = range 1
-
-fun duplicate_number_list xs = zip (countup (length xs)) xs
-
-{% endhighlight %}
   
-# Callbacks #
-
-<p align="justify">
-Here is a classic example of callback implementation in SML .	
-</p>
-
-{% highlight sml %}
-(*
-A list named cbs for holding the callbacks.
-The elements of the list are actually closures.
-
-The body of the closure is a function which takes an 
-int and produces something without returning anything.
-*)
-val cbs : (int -> unit) list ref = ref []
-
-(*
-This function is for registering callbacks. Registering is 
-simple. It is just adding the closure to the closure callback list.
-So onKeyEvent takes a function of type (int -> unit) and returns unit
-
-Most importantly, the type of onKeyEvent places no restriction on what 
-extra data a callback can access when it is called. Since a closure can 
-access its environment when it is defined, any environment when it is 
-defined can be accessed at the calling time of the closure.
-*)
-fun onKeyEvent f =
-    cbs := f :: (!cbs)
-
-(*
-This function loops through the cbs list and call the closures one by one
-with a parameter.
-*)
-fun onEvent i =
-    let
-	fun loop closures =
-	    case closures of
-		[] => ()
-	      | c::cs' => (c i; loop cs')
-    in
-	loop (!cbs)
-    end
-
-(*
-Client implementation.
-*)
-
-(*
-This code block is for keeping track of how many times the event occurs.
-Every time onEvent is called this closure will be called.
-And the closure increments the timePressed variable by one. 
-In here the environment which the closure will change, includes timePressed 
-variable.
-*)
-val timePressed = ref 0
-val _ = onKeyEvent ( fn _ => timePressed := (!timePressed) + 1)
-
-(*
-This code block is registering a callback which simply prints out i.
-*)
-
-fun printIfPressed i =
-    onKeyEvent (fn j => 
-		   if i = j
-		   then print ("you pressed " ^ Int.toString i ^ "\n")
-		   else ())
-
-val _ = printIfPressed 4
-val _ = printIfPressed 5
-val _ = printIfPressed 6
-val _ = printIfPressed 7
-
-(*----THE OUTPUT----*)
-- use "callbacks.sml";
-[opening callbacks.sml]
-val cbs = ref [fn,fn,fn,fn,fn] : (int -> unit) list ref
-val onKeyEvent = fn : (int -> unit) -> unit
-val onEvent = fn : int -> unit
-val timePressed = ref 0 : int ref
-val printIfPressed = fn : int -> unit
-val it = () : unit
-- onEvent 1;
-val it = () : unit
-- onEvent 4;
-you pressed 4
-val it = () : unit
-- onEvent 5;
-you pressed 5
-val it = () : unit
-- onEvent 8;
-val it = () : unit
-- timePressed;
-val it = ref 4 : int ref
-- onEvent 7;
-you pressed 7
-val it = () : unit
-- timePressed;
-val it = ref 5 : int ref
-- 
-{% endhighlight %}
-
 # Abstract Data Types #
 
 Here is a set implementation in SML.

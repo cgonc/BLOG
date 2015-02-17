@@ -1,12 +1,13 @@
 ---
 layout: post
-title:  "004. Introduction to Types"
+title:  "Introduction to Types"
 date:   2015-01-04 11:25:05
 categories: Programming-Languages
 ---
 <p align="justify">
 A programming language should categorize its variables into some types at some point during the life cycle of 
-a program. 
+a program. We can categorize the types into two as base types and compound types. Especially for the
+compound types choosing the right kind for your data is crucial.
 <br>
 <br>
 Base types : Programming languages have base types like int, bool, double, unit .
@@ -24,7 +25,10 @@ To create a compound type we can use one of the following three options.
 # Each-of-type #
 <p align="justify">
 Each of types are familiar to most of us. In SML a tuple (int * bool) is an each of type. In Java we can 
-construct this type with objects. For example org.apache.commons.lang3.tuple.Pair<L,R> is the most famous one.
+construct this type (a tuple) with objects.For example org.apache.commons.lang3.tuple.Pair<L,R> is the most 
+famous one. 
+<br>
+A base types is also an each-of-type. 
 A variable which is an each of type contains t1,t2,t3,..., and tn at the same time.
 </p>
 
@@ -40,7 +44,7 @@ a prime number or some prime numbers between these two numbers we should return 
 as list but if there is not we should return a NONE value. 
 </p>
 
-> So our return type either includes a NONE type  or SOME Int List. 
+So our return type either includes a NONE type  or SOME Int List. 
 This is a good example of a one-of-type.
 
 {% highlight  java%}
@@ -84,12 +88,11 @@ fun get_prime_between (start , stop) =
     end
 {% endhighlight %}
 
-<p align="justify">
-In the above example the return type of get_prime_between function can be NONE or SOME Int List. It can hold one type and that 
-one type can vary between these two like an or statement.
-At some sense, logical and operator may be associated with a product operator and logical or operator may be associated with a sum operator.
-Maybe the naming comes from this.
-</p>
+In the above example the value of the get_prime_between function can be __NONE__ or __SOME Int List__. 
+It can hold one type and that one type can vary between these two like _OR_ statement.
+At some sense, logical _AND_ operator may be associated with an each of type and logical _OR_ operator 
+may be associated with a one-of-type. This is the reason that an each-of-type can sometimes be called as 
+__product type__ and a one-of-type can sometimes be called as a __sum type__.
 
 {% highlight  java%}
 - get_prime_between(10,11);
@@ -104,7 +107,7 @@ val it = SOME [139,137] : int list option
 
 # Self-reference-type #
 <p align="justify">
-This kind of type allows to describe recursive data structures. For instance a tree structures
+This kind of type allows to describe recursive data structures. For instance a tree structure
 which includes integer values for its nodes can be one of two types which is an int and
 a tree itself. In functional paradigms as far as I can see it is common to represent lists
 as trees. Here is an example of a basic self-reference-type.  
