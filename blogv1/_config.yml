@@ -1,5 +1,5 @@
 # Site settings
-title: Cgon_Web_Log
+title: Web-Log
 email: caglar.gonul.001@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   Programming languages notes are mostly taken from the MOOC course named Programming Languages by Dan Grossman.

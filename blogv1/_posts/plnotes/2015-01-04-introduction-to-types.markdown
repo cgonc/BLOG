@@ -47,46 +47,7 @@ as list but if there is not we should return a NONE value.
 So our return type either includes a NONE type  or SOME Int List. 
 This is a good example of a one-of-type.
 
-{% highlight  java%}
-fun is_prime (n) = 
-    let
-	fun helper (a) =
-	    if (n mod a) = 0 andalso a <> 1 
-	    then false
-	    else
-		if a = 1
-		then true
-		else
-		    helper(a-1)
-    in
-	if n = 1 
-	then false
-	else
-	    if n = 2
-	    then true
-	    else 
-		if (n mod 2) = 0
-		then false
-		else
-		    helper (floor ( Math.sqrt(Real.fromInt n) + 1.0 ) )
-    end
-
-fun get_prime_between (start , stop) =
-    let
-	fun helper (x , acc) =
-	    if x = stop
-	    then acc
-	    else 
-		if is_prime (x)
-		then helper (x + 1, x::acc)
-		else helper (x + 1, acc)
-	val result = helper (start, [])
-    in
-	case result of
-	    [] => NONE
-	  | x::xs => SOME result 
-    end
-{% endhighlight %}
+{% gist cgonul/d9dfac7551359ba64749 %}
 
 In the above example the value of the get_prime_between function can be __NONE__ or __SOME Int List__. 
 It can hold one type and that one type can vary between these two like _OR_ statement.

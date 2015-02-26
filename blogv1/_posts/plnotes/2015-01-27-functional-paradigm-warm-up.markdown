@@ -67,26 +67,7 @@ More examples can be given in SML language.
   over and over till the integer reaches zero. like so f(f(f(f(f(f(x))))))
   
 This one is mind bending but after understanding how it works it is beautiful.
-
-
-{% highlight java %}
-
-fun n_times (f,n,x) =
-    if n=0
-    then x
-    else f (n_times(f,n-1,x))
-
-fun double x = x+x
-
-val x1 = n_times(double,4,7) (* answer: 112 *)
-
-fun increment x = x+1
-
-val x2 = n_times(increment,4,7) (* answer: 11 *)
-
-val x3 = n_times(tl,2,[4,8,12,16]) (* answer: [12,16] *)
-
-{% endhighlight %}
+{% gist cgonul/827f3793950f744db8f9 %}
 
 # Anonymous Functions #
 
@@ -94,24 +75,7 @@ val x3 = n_times(tl,2,[4,8,12,16]) (* answer: [12,16] *)
 Functional languages always have a way of defining anonymous functions. Here is a simple
 example for it in SML.
 </p>
-
-{% highlight java %}
-fun times_until_zero (f,x) =
-    let
-	fun inner (acc,value) =
-	    if value <= 0
-	    then acc
-	    else inner (1+acc , f(value))
-    in
-	inner (0, x)
-    end
-
-fun randfun x = x - 1
-
-val uz1 = times_until_zero (randfun,1000)
-
-val uz2 = times_until_zero ((fn y => y - 1), 100)
-{% endhighlight %}
+{% gist cgonul/f08cf13befcff0df13b2 %}
 
 <p align="justify">
 When defining anonymous function one should be careful for not defining unnecessary 
@@ -163,7 +127,7 @@ val it = () : unit
 {% endhighlight %}
 <p align="justify">
 When observing the evaluation of map function one can see its type which takes a function whose type is 
-( take any type of and return any type of b) , and (a list type of a) and returns a list type of b.
+( take any type of 'a' and return any type of 'b' ) , and (a list type of 'a') and returns a list type of 'b'.
 It is really powerful for a language that makes your variables automatically generic for you.
 </p>
 

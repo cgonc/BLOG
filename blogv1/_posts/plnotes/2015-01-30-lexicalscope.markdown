@@ -60,118 +60,12 @@ your bindings take place. In my personal opinion writing with a lexically scope 
 more traceable.
 
 Here is another example for lexical scope in SML .
-
-{% highlight  sml%}
-
-(*
-Example 1
-*)
-val x = 1
-fun f y =
-    let
-	 val x = y+1
-    in
-	 fn z => x + y + z
-    end
-val x = 3
-val g = f 4
-val y = 5
-val z = g 6
-
-(*
-EVALUATION
-1. x equels to 1
-2. f (y) equals to a function which returns another function that is f(z) = 2*y + 1 + z
-   f (y) = fn z => 2*y + 1 + z
-3. x equals to 3
-4. g is a variable which equals to f(4)
-   g = fn z => 9 + z
-   So g is a function defined as g(z) = 9 + z
-5. y equals to 5
-6. z = 9 + 6 = 15 
-*)
-{% endhighlight %}
+{% gist cgonul/4b84946cddfc1fe4c867 %}
   
 # Abstract Data Types #
 
 Here is a set implementation in SML.
-
-{% highlight sml %}
-(*
-This example is demonstrating that a record of closures
-that have the same environment is a lot like an object
-in object-oriented programming :
-	-- the functions are methods.
-	-- the bindings in the environment are private fields and methods.
-
-It suggests (correctly) that functional programming and 
-object-oriented programming are more similar than they might
-first appear.
-
-The key to an abstract data type (ADT) is requiring clients to
-use it via a collection of functions rather than directly accessing
-its private implementation.
-
-Thanks to this abstraction, we can later change how the data type is
-implemented without changing how it behaves for the clients.
-
-In an object-oriented language, you might implement an ADT by 
-defining a class with all private fields (inaccessible to clients) 
-and some public methods (the interface with the clients).
-
-The same thing can be implemented in ML with a record of closures; the
-variables that the closures use form the environment correspond to the
-private fields.
-
-This example is an implementation of a set of integers that supports creating 
-a new bigger set and seeing if an integer is in a set. The sets are mutation-free
-in the sense that adding an integer to a set produces an new different set.
-*)
-
-(*
-A set is a record with three fields, each of which holds a function.
-*)					  
-datatype set = S of { insert : int -> set,
-		      member : int -> bool,
-		      size   : unit -> int,
-		      members : unit -> int list}
-
-(*
-Once we construct the empty set implementation we can use its 
-insert member function to add new elements and create new sets 
-out of it.
-*)
-val empty_set =
-    let
-	fun make_set xs =
-	    let	
-		fun contains i = List.exists (fn j => i=j) xs
-	    in
-		S 	{ insert = fn i => if contains i
-					   then make_set xs
-					   else make_set (i::xs),
-			  member = contains,
-			  size   = fn () => length xs,
-			  members = fn () => xs
-			}
-	    end
-    in
-	make_set []
-    end
-	
-val S s01 = empty_set
-val S s02 = (#insert s01) 34
-val S s03 = (#insert s02) 35
-val S s04 = (#insert s03) 36
-
-val m04 = (#members s04)()
-val size_04 = (#size s04)()
-
-val t1 = (#member s04) 35
-val t2 = (#member s04) 36
-val t3 = (#member s04) 37
-
-{% endhighlight %}			
+{% gist cgonul/17ab9f383793b25a7a40 %}
 
 # Mutation in ML References # 
 

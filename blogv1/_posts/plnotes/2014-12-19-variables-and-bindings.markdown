@@ -19,45 +19,11 @@ and keep a single value during their entire lifetime and also functions are trea
 So in an imperative language like java the following code produces 
 
 # x : 100 #
-
-{% highlight java %}
-public class MutateMe {
-	int x ;
-	public int getX() {
-		return x;
-	}
-	public void setX(int x) {
-		this.x = x;
-	}
-}
-
-public class Mutation {
-	public static void main(String[] args) {
-		MutateMe x = new MutateMe();
-		x.setX(5);
-		MutateMe y = new MutateMe();
-		y = x;
-		y.setX(100);
-		System.out.println("x : " + x.getX());
-	}
-}
-{% endhighlight %}
+{% gist cgonul/4cfe232a2971fea9252d %}
 
 One can wonder why the following java code produces 
-
 # x : 5 #
-
-{% highlight java %}
-public class WhyNotMutate {
-
-	public static void main(String[] args) {
-		Integer x = 5;
-		Integer y = x;
-		y = 100;
-		System.out.println("x : " + x);
-	}
-}
-{% endhighlight %}
+{% gist cgonul/4888baf7099521f281bf %}
 
 My idea is **Integer y = x** is a syntactic sugar for Integer y = new Integer(x). So it produces a new variable.
 
