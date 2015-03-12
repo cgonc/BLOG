@@ -13,34 +13,10 @@ and the environment that was current when we created the function. It is like an
 just something with two parts however you can not access the parts of the pair separately.
 All you can do is call the function. Lets define a closure in Java.
 </p>
+{% gist cgonul/3f3aa72db76e253d3df6 %} 
+
+And the output :
 {% highlight  java%}
-
-public interface IClosure {	
-	public void callMe();
-}
-
-public class Main {
-	public static void main(String[] args) {
-		 
-		IClosure aClosure = new IClosure() {
-			int x = 1;
-			@Override
-			public void callMe() {
-				x += 1;
-				System.out.println("x : " + x);
-				
-			}
-		};
-		
-		// First call and it prints 2.
-		aClosure.callMe();
-		
-		// Second call and it prints 3!!!
-		// The closure is changing its environment (x) when called. 
-		aClosure.callMe();
-	}
-}
-
 //*--THE OUTPUT--*//
 x : 2
 x : 3
@@ -50,24 +26,10 @@ x : 3
 As it is mentioned all you can do is call the closure. You can not access it is environment but the
 function in it has the capability of changing this special environment. In Java you need an interface 
 to define a closure. In javascript it seems more natural.
+{% gist cgonul/acb017aaecbcf8fd55f4 %} 
 
+And the console output :
 {% highlight  javascript%}
-var closure = ( function () {
-    var x = 1;
-    
-    function callMe() {
-        x = x + 1;
-        console.log("x : " + x);
-    }
-    return callMe;
-} ) ();
-
-// First call and it prints 2
-closure();
-// Second call and it prints 3!!!
-// The closure is changing its environment. 
-closure();
-
 //THE OUTPUT
 x : 2
 x : 3

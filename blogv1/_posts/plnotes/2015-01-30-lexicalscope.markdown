@@ -61,6 +61,21 @@ more traceable.
 
 Here is another example for lexical scope in SML .
 {% gist cgonul/4b84946cddfc1fe4c867 %}
+
+And the evaluation resuls:
+
+{% highlight java %}
+1. x equels to 1
+2. f (y) equals to a function which returns another function that is f(z) = 2*y + 1 + z
+f (y) = fn z => 2*y + 1 + z
+3. x equals to 3
+4. g is a variable which equals to f(4)
+g = fn z => 9 + z
+So g is a function defined as g(z) = 9 + z
+5. y equals to 5
+6. z = 9 + 6 = 15
+
+{% endhighlight %}	
   
 # Abstract Data Types #
 
@@ -68,6 +83,8 @@ Here is a set implementation in SML.
 {% gist cgonul/17ab9f383793b25a7a40 %}
 
 # Mutation in ML References # 
+
+A simple example of mutation in sml. It will be useful when discussing callbacks.
 
 {% highlight sml %}
 

@@ -1,9 +1,0 @@
----
-layout: post
-title:  "001. Akka Adventures"
-date:   2015-01-29 23:46:05
-categories: Tech-Notes
----
-<p align="justify">
-Just a post with a different category.
-</p>

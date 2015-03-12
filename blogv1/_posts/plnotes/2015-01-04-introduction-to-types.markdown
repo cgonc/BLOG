@@ -49,11 +49,7 @@ This is a good example of a one-of-type.
 
 {% gist cgonul/d9dfac7551359ba64749 %}
 
-In the above example the value of the get_prime_between function can be __NONE__ or __SOME Int List__. 
-It can hold one type and that one type can vary between these two like _OR_ statement.
-At some sense, logical _AND_ operator may be associated with an each of type and logical _OR_ operator 
-may be associated with a one-of-type. This is the reason that an each-of-type can sometimes be called as 
-__product type__ and a one-of-type can sometimes be called as a __sum type__.
+An evaluation of get_prime_between function :
 
 {% highlight  java%}
 - get_prime_between(10,11);
@@ -65,6 +61,12 @@ val it = SOME [131] : int list option
 - get_prime_between(132,140);
 val it = SOME [139,137] : int list option
 {% endhighlight %}
+
+In the above example the value of the get_prime_between function can be __NONE__ or __SOME Int List__. 
+It can hold one type and that one type can vary between these two like _OR_ statement.
+At some sense, logical _AND_ operator may be associated with an each of type and logical _OR_ operator 
+may be associated with a one-of-type. This is the reason that an each-of-type can sometimes be called as 
+__product type__ and a one-of-type can sometimes be called as a __sum type__.
 
 # Self-reference-type #
 <p align="justify">

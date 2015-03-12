@@ -8,35 +8,7 @@ categories: Programming-Languages
 Before explaining the case expressions, let's consider some useful examples of one-of-types in SML. 
 
 # Some Examples of One-of Types in SML #
-
-{% highlight  sml%}
-datatype suit = Club | Diamond | Heart | Spade
-
-datatype rank = Jack | Queen | King | Ace | Num of int
-
-val card1 = (Club,Num 2)
-val card2 = (Diamond, Jack)
-val card3 = (Heart, Ace)
-
-(*
-This data type named id can represent a student. 
-A new comer student does not necessarily has to 
-have a student id. 
-
-So this kind of student will be represented by his/her
-name. However when the student has a student id, 
-we can represent him/her with this integer.
-*)
-
-datatype id =   StudentNum of int 
-              | Name of string * (string option) * string
-
-val student1 = StudentNum 19913770
-val student2 = Name ("Caglar", NONE, "Gonul")
-val student3 = Name ("Mehmet", NONE, "Mahmutoglu")
-val student4 = Name ("Sinan", NONE, "Ersan")
-val student5 = Name ("Mehmet", SOME "Ersin", "Saracoglu")
-{% endhighlight %}
+{% gist cgonul/496256a65c91b112dee4 %} 
 
 <p align="justify">
 When we consider the example of datatype id, this binding adds a new type called id and
@@ -103,69 +75,9 @@ naturally be thought as a tree. I think it is beautiful and simple.
  * __eval__ function is for evaluating an expression
  * __fetch_constants__ function returns the list of all the constants in an expression tree.
  * __has_mult__ function indicates whether there is at least one multiplication in the expression. 
-
-{% highlight  sml%}
-
-(*
-A datatype exp which can be used to represent 
-an arithmetic expression
-*)
-datatype exp = 
-	 Constant of int
-       | Negate of exp
-       | Add of exp * exp
-       | Multiply of exp * exp
-       | Division of exp * exp
-
-val x1 = Constant 19
-val x2 = Constant 20
-val x3 = Constant 21
-val x4 = Constant 22
-
-val y1_of_add_x1_x2 = Add (x1,x2)
-val y2_of_add_x3_x4 = Add (x3,x4)
-
-val z1_of_multiply_y1_y2 = Multiply (y1_of_add_x1_x2,y2_of_add_x3_x4) 
-
-(*
-A function which can be used to evaluate an expression
-*)
-fun eval e =
-    case e of
-	Constant i => i
-      | Negate e2 => ~(eval e2)
-      | Add (e1,e2) => (eval e1) + (eval e2)
-      | Multiply (e1,e2) => (eval e1) * (eval e2)
-      | Division (e1,e2) => (eval e1) div (eval e2)     
-
-(*
-A function which can return the list of all the constants in 
-an expression
-*)
-
-fun fetch_constants e =
-    case e of
-	Constant i => [i]
-      | Negate e2 => fetch_constants e2
-      | Add (e1,e2) => fetch_constants e1 @ fetch_constants e2
-      | Multiply (e1,e2) => fetch_constants e1 @ fetch_constants e2  
-      | Division (e1,e2) => fetch_constants e1 @ fetch_constants e2    
-
-(*
-A bool function indicating whether there is at least one multiplication
-in the expression.
-*)
-
-fun has_mult e =
-    case e of
-	Constant i => false
-      | Negate e2 => has_mult e2
-      | Add (e1,e2) => has_mult e1 orelse has_mult e2
-      | Multiply (e1,e2) => true
-      | Division (e1,e2) => has_mult e1 orelse has_mult e2
-  
-{% endhighlight %}
-
+ 
+{% gist cgonul/88da06eaf191d66d4d5c %}
+ 
 <p align="justify">
 We can also use nested case expressions. Here is an example.
 </p>
@@ -176,49 +88,6 @@ We can also use nested case expressions. Here is an example.
  * __print_tree__ prints the expression tree
  * __eval_tree__ function can evaluate the expression to its integer result where nested case expression is 
  used.
+ 
+{% gist cgonul/e3844ff288b11282025e %}
 
-{% highlight  sml%}
-
-datatype oper = mult | add
-
-datatype tree = Node of oper * tree * tree
-	      | Leaf of int
-
-
-val l1 = Leaf 1
-val l2 = Leaf 2
-val l3 = Leaf 3
-val l4 = Leaf 4
-val l5 = Leaf 5
-
-val n1 = Node (mult,l1,l2)
-val n2 = Node (add,l3,l4)
-val n3 = Node (mult,n2,l5)
-val n4 = Node (add,n1,n3)
-
-(*
-A simple function to print a tree
-*)
-
-fun oper_to_string operation =
-    case operation of
-	mult => "*"
-      | add => "+" 
-
-fun print_tree tree =
-    case tree of 
-	Leaf e => " |" ^ Int.toString (e) ^ "| "
-     | Node (ope, t1, t2)  => " ( " ^ print_tree t1 ^ oper_to_string(ope) ^ print_tree t2 ^ " ) " 
-
-(*
-A simple function to evaluate a tree
-*)
-
-fun eval_tree tree =
-    case tree of
-	Leaf e => e
-      | Node (ope, t1, t2) => case ope of
-				  add => eval_tree t1 + eval_tree t2
-				| mult => eval_tree t1 * eval_tree t2 
-
-{% endhighlight %}

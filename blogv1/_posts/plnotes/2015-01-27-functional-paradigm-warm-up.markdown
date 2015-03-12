@@ -35,16 +35,11 @@ I realize I wrote a more general purpose function definition. The definition of 
 can be used for any function not just g like so: 
 </p>
 
+{% gist cgonul/1e9614c9e65eb8e39883 %} 
+
+And when we evaluate the values we get the following results :
+
 {% highlight sml %}
-fun g(x) = 3*x
-fun f(x,l) = 2*x + l(x) 
-fun z(x) = ~6*x + x*x
-fun m(x) = x*x*x
-
-val v1 = f(3,g)
-val v2 = f(4,z)
-val v3 = f(5,m)
-
 (*
 --EVALUATION RESULTS--
 *)
@@ -91,30 +86,13 @@ fn y => tl y
 {% endhighlight %}
 
 # Map and Filter #
-Simple map and filter implementations in SML language.
+A simple map and filter implementations in SML language :
+
+{% gist cgonul/8d421d23541e74df1af8 %}
+
+And evaluating the values of the above example :
 
 {% highlight java %}
-(*
-Simple map and filter implementations
-*)
-
-fun map (f, xs) =
-    case xs of
-	[] => []
-      | x::xs' => (f x) :: map (f,xs')
-
-fun filter (f, xs) =
-    case xs of
-	[] => []
-      | x::xs' => if(f x) 
-		  then  x :: filter (f, xs')
-		  else filter (f, xs')
-
-val x1 = [1,2,3,4,5]
-val x2 = map ((fn y => y * 2), x1)
-val x3 = map ((fn y => y + 2), x1)
-val x4 = filter ((fn y => y < 2), x1)
-
 (*---EVALUATION---*)
 val map = fn : ('a -> 'b) * 'a list -> 'b list
 val filter = fn : ('a -> bool) * 'a list -> 'a list
@@ -136,21 +114,7 @@ It is really powerful for a language that makes your variables automatically gen
 Fold is also a very popular function in functional paradigm. Generally its idea is 
 traverse a recursive data structure onto an accumulator.
 
-{% highlight sml %}
-(*
-Fold implementations
-*)
-
-fun fold (f, acc, xs) =
-    case xs of 
-	[] => acc
-      | x::xs' => fold (f, f(acc,x) , xs')
-
-val x = [1,2,3,4,5]
-val max = fold ((fn (acc,x) => if x > acc then x else acc),hd x, x)
-val sum = fold ((fn (acc,x) => x + acc), 0, x)
-val product = fold ((fn (acc,x) => x * acc) ,1 ,x) 
-{% endhighlight %}
+{% gist cgonul/116fb11c268fc0a603b8 %}
 
 # Function Composition #
 
@@ -165,24 +129,7 @@ It seems handy.
  * __sqrt_of_abs__ and __sqrt_of_abs_equals__ functions has the same value.
  * __sqrt_of_abs_cur__ is the curried form of it.
 
-{% highlight sml %}
-(*
-Function compositon examples
-*)
-
-fun compose (f,g) = fn x => f (g x)
-fun sqrt_of_abs i = Math.sqrt (Real.fromInt (abs i))
-
-(*Equals*)
-fun sqrt_of_abs_equals i = (Math.sqrt o Real.fromInt o abs ) i
-
-(*Curied form*)
-val sqrt_of_abs_cur = Math.sqrt o Real.fromInt o abs 
-
-infix |> (* tells the parser |> is a function that appears between its two arguments *)
-fun x |> f = f x
-fun sqrt_of_abs_readable i = i |> abs |> Real.fromInt |> Math.sqrt
-{% endhighlight %}
+{% gist cgonul/436d32dad2d0561b7ef9 %}
 
 # Currying and Partial Application #
 
@@ -194,59 +141,4 @@ an anonymous function to a variable. I think with the curried form we have more 
    which gives the summation of an integer list from that definition, and also a product function 
    which gives the product of an integer list.
  
-
-{% highlight sml %}
-(*
-Currying and Partial Application Examples
-*)
-
-val sorted3 = fn x => fn y => fn z => z >= y andalso y >= x
-
-val isSorted = sorted3 3 4 5
-
-(*
-Curried form of fold
-*)
-
-fun fold f = fn acc => fn xs => 
-		case xs of
-		    [] => acc
-		  | x::xs' => fold f (f(acc,x)) xs'
-
-(*
-We are now more elastic. 
-For instance we can define a sum and a product variable like so
-*)
-val sum = fold (fn (acc,x) => x + acc) 0
-val product = fold (fn (acc,x) => x * acc) 1
-
-val x_sum = sum [1,2,3,4,5]
-val x_product = product [1,2,3,4,5]
-
-(*
-Syntactic sugar for defining curried functions
-*)
-
-fun fold_s f acc xs =
-    case xs of
-	[] => acc
-      | x::xs' => fold_s f (f(acc,x)) xs'
-
- 
-(*
-More examples
-*)
-
-fun zip xs ys =
-    case (xs,ys) of
-	([],[]) => []
-      | (x::xs',y::ys') => (x,y) :: (zip xs' ys')
-      | _ => raise Empty
-
-fun range i j = if i > j then [] else i :: range (i+1) j
-
-val countup = range 1
-
-fun duplicate_number_list xs = zip (countup (length xs)) xs
-
-{% endhighlight %}
+{% gist cgonul/2311af7ed98035b197a6 %}
