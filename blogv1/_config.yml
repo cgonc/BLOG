@@ -8,6 +8,7 @@ baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://localhost:4000"
 twitter_username: caglar_gonul
 github_username:  cgonul
+linkedin_username : caglargonul
 
 # Build settings
 markdown: kramdown
