@@ -97,5 +97,4 @@ a recursive Tree object in JavaScript.
 
 <iframe width="100%" height="300" src="//embed.plnkr.co/tjEN3j8i0uzULbhWPZmI/script.js" allowfullscreen="allowfullscreen" frameborder="1"></iframe>
 
-
 ![Minion](http://octodex.github.com/images/minion.png)
