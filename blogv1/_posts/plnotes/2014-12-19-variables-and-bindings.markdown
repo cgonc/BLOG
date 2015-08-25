@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Introduction to Variables and Bindings"
+title:  "Variables and Bindings"
 date:   2014-12-19 11:25:05
 categories: Programming-Languages
 ---
@@ -22,10 +22,11 @@ So in an imperative language like java the following code produces
 {% gist cgonul/4cfe232a2971fea9252d %}
 
 One can wonder why the following java code produces 
+
 # x : 5 #
 {% gist cgonul/4888baf7099521f281bf %}
 
-My idea is **Integer y = x** is a syntactic sugar for Integer y = new Integer(x). So it produces a new variable.
+My idea is  is a syntactic sugar for Integer y = new Integer(x). So it produces a new variable.
 
 <p align="justify">
 The type system determines the behaviour of variables and bindings but one can not generalize the overall
@@ -35,9 +36,13 @@ Type system can be strong (Java) or weak (C), can be static (Java) or dynamic (R
 I will document the type system exclusively
 in my later posts. But as an example I can talk about ML.
 <br><br>
+
 ML has a strong static type system. An ML program is a sequence of bindings. Each binding gets type-checked and then evaluated. 
-What type a binding has, depends on a static environment. A static environment is roughly the types of the preceding bindings in the file.
-How a binding is evaluated depends on a dynamic environment. A dynamic environment can be described as the values of the preceding bindings in the file.
+What type a binding has, depends on a static environment. 
+
+At a certain line of the code, a static environment is roughly <strong>the types</strong>  of the preceding bindings in the file.
+How a binding is evaluated depends on a dynamic environment. 
+A dynamic environment can be described as the <strong>values</strong> of the preceding bindings in the file.
 For type checking we use the static environment. When a variable is type checked, the current static environment is mutated into something that holds the type of the current variable.
 For evaluating we use the dynamic environment. When a variable is evaluated, the current dynamic environment is mutated into something that holds the value of the current variable. 
 </p>

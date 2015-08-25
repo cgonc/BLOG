@@ -1,26 +1,27 @@
 ---
 layout: post
-title:  "Introduction to Types"
+title:  "Types"
 date:   2015-01-04 11:25:05
 categories: Programming-Languages
 ---
 <p align="justify">
-A programming language should categorize its variables into some types at some point during the life cycle of 
-a program. We can categorize the types into two as base types and compound types. Especially for the
-compound types choosing the right kind for your data is crucial.
+A programming language should categorize its variables into some types at some point during 
+the life cycle of a program. 
+We can categorize the types into two <strong> as base types and compound types.</strong> 
+Especially for the compound types choosing the right kind for your data is crucial.
 <br>
 <br>
-Base types : Programming languages have base types like int, bool, double, unit .
+<strong>Base types :</strong> Programming languages have base types like int, bool, double, unit .
 <br>
 <br>
-Compund types :  Compound types contains other types in their definition. Compound types are powerful.
-To create a compound type we can use one of the following three options.
+<strong>Compund types :</strong> Compound types contains other types in their definition. 
+Compound types are powerful. To create a compound type we can use one of the following three options.
 <br>
 </p>
 
-1. Each-of-type also known as product types . 
-2. One-of-type also known as sum types . 
-3. Self-reference-type also known as  recursive types . 
+1. __Each-of-type__ also known as product types . 
+2. __One-of-type__ also known as sum types . 
+3. __Self-reference-type__ also known as  recursive types . 
 
 # Each-of-type #
 <p align="justify">
@@ -30,6 +31,8 @@ famous one.
 <br>
 A base types is also an each-of-type. 
 A variable which is an each of type contains t1,t2,t3,..., and tn at the same time.
+In each of type the variable actually just have one kind of type however that type can be a multiple pair 
+or something similar. I think the main difference will be more clear when defining one-of-type.
 </p>
 
 # One-of-type #
@@ -44,7 +47,7 @@ a prime number or some prime numbers between these two numbers we should return 
 as list but if there is not we should return a NONE value. 
 </p>
 
-So our return type either includes a NONE type  or SOME Int List. 
+So our return type either includes a __NONE type__  or __SOME Int List.__ 
 This is a good example of a one-of-type.
 
 {% gist cgonul/d9dfac7551359ba64749 %}
@@ -86,3 +89,13 @@ datatype my_int_list = Empty | Cons of int * my_int_list
 val one_two_three = Cons(1,Cons(2,Cons(3,Empty)))
 
 {% endhighlight %}
+
+<p align="justify">
+Javascript is quite natural when defining recursive data types. Below is an example of how to define 
+a recursive Tree object in JavaScript.
+</p>
+
+<iframe width="100%" height="300" src="//embed.plnkr.co/tjEN3j8i0uzULbhWPZmI/script.js" allowfullscreen="allowfullscreen" frameborder="1"></iframe>
+
+
+![Minion](http://octodex.github.com/images/minion.png)
