@@ -2,7 +2,7 @@
 layout: post
 title:  "Closures"
 date:   2015-02-15 10:26:05
-categories: Programming-Languages
+categories: Programming Languages
 ---
 
 # Closures #

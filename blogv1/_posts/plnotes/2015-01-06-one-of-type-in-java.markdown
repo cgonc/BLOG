@@ -2,7 +2,7 @@
 layout: post
 title:  "Implementing One-of-type in Java"
 date:   2015-01-06 16:40:05
-categories: Programming-Languages
+categories: Programming Languages
 ---
 <p align="justify">
 In object oriented programming one of types can be implemented using subclassing.

@@ -2,7 +2,7 @@
 layout: post
 title:  "Variables and Bindings"
 date:   2014-12-19 11:25:05
-categories: Programming-Languages
+categories: Programming Languages
 ---
 <p align="justify">
 Although it seems the simplest concept in programming languages, there are lots of concepts to be thought of when researching variables and bindings. 

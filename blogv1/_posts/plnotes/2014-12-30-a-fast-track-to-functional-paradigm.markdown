@@ -2,7 +2,7 @@
 layout: post
 title:  "Fast Track to Functional Paradigm"
 date:   2014-12-30 18:56:32
-categories: Programming-Languages
+categories: Programming Languages
 ---
 <p align="justify">
 This post includes some simple functions which is written in Scala language.

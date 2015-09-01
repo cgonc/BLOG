@@ -2,7 +2,7 @@
 layout: post
 title:  "Functional Paradigm Warm-up"
 date:   2015-01-27 10:16:05
-categories: Programming-Languages
+categories: Programming Languages
 ---
 # Some Terms #
 <p align="justify">

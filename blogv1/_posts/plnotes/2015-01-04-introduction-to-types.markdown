@@ -2,7 +2,7 @@
 layout: post
 title:  "Types"
 date:   2015-01-04 11:25:05
-categories: Programming-Languages
+categories: Programming Languages
 ---
 <p align="justify">
 A programming language should categorize its variables into some types at some point during 

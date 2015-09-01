@@ -2,7 +2,7 @@
 layout: post
 title:  "Lists as Recursive Data Type"
 date:   2015-01-23 15:49:05
-categories: Programming-Languages
+categories: Programming Languages
 ---
 
 <p align="justify">

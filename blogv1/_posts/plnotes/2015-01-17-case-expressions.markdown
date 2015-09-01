@@ -2,7 +2,7 @@
 layout: post
 title:  "Case Expressions"
 date:   2015-01-17 10:18:05
-categories: Programming-Languages
+categories: Programming Languages
 ---
 
 Before explaining the case expressions, let's consider some useful examples of one-of-types in SML. 

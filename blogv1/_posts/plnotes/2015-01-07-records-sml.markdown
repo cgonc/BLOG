@@ -2,7 +2,7 @@
 layout: post
 title:  "Records in SML"
 date:   2015-01-07 21:42:05
-categories: Programming-Languages
+categories: Programming Languages
 ---
 In SML we can examine tuple operations with this sample code.I personally sometimes need a data structure
 which can hold different types in one variable easily. It is actually very handy that a strongly

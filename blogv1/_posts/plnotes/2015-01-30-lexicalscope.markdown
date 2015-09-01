@@ -2,7 +2,7 @@
 layout: post
 title:  "Lexical Scope"
 date:   2015-01-30 10:26:05
-categories: Programming-Languages
+categories: Programming Languages
 ---
 What does it mean ?
  

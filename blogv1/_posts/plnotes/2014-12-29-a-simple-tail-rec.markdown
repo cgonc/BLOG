@@ -2,7 +2,7 @@
 layout: post
 title:  "Tail Recursion"
 date:   2014-12-29 18:56:32
-categories: Programming-Languages
+categories: Programming Languages
 ---
 <p align="justify">
 It is not a big deal however I want to add this to my notes. When executing the following simple factorial code which is written 

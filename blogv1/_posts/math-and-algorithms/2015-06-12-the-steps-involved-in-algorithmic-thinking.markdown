@@ -2,7 +2,7 @@
 layout: post
 title:  "The Steps Involved in Algorithmic Thinking"
 date:   2015-06-12 13:54:00
-categories: math-and-algorithms
+categories: Math & Algorithms
 ---
 
 There is a quote that needs to be shared. 

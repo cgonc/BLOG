@@ -3,8 +3,8 @@ layout: default
 ---
 <div class="home">	
 	<div class="post-box">	
-		{% for category in page.categories_map %}
-		  <h2>{{ category[0] }}</h2>
+		{% for category in page.categories_map  %}
+		  <h2>{{ category[0] | join: ' ' | titleize  }}</h2>
 		  <ul class="post-list">
 		  {% for post in category[1] %}
 			<li><a href="{{ post.url }}">{{ post.title }}</a></li>
