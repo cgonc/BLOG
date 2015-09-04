@@ -21,4 +21,5 @@ is the static environment than a compile error occurs. This is not true with mut
 2. When evaluating the type of a binding, the type inferencer gather all the necessary 
 facts of the preceding bindings. 
 3. If it is impossible to infer a type than a compiler error will occur.
-4. If the type has no constraint on it, it can be any type which is cool thing. 
+4. If the type has no constraint on it, it can be any type which is a cool thing. 
+
