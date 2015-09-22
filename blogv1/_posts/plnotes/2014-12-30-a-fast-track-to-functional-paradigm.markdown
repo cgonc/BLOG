@@ -6,7 +6,7 @@ categories: Programming Languages
 ---
 <p align="justify">
 This post includes some simple functions which is written in Scala language.
-All of the simple routines are written as tail recursive functions. They are realy simple :
+All of the simple routines are written as tail recursive functions.
 </p>
 
  * __pow__ calculates the power of x over y

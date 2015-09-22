@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Implementing One-of-type in Java"
+title:  "One of Type Examples"
 date:   2015-01-06 16:40:05
 categories: Programming Languages
 ---
@@ -32,6 +32,13 @@ Maximum of an empty list is : None
 
 As it can be seen from TestOption class the return type of the max function can be
 either ***None*** or ***Some Int***.
+
+# Some Examples of One-of Types in SML #
+{% gist cgonul/496256a65c91b112dee4 %} 
+
+__Datatype id__ , adds a new type called __id__ and
+two constructors __StudentNum__ and __Name__. A constructor is a function for creating
+values of the new type in SML. 
 
 
 

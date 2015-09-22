@@ -1,18 +1,22 @@
 ---
 layout: post
-title:  "Closures"
+title:  "Closure Notes"
 date:   2015-02-15 10:26:05
 categories: Programming Languages
 ---
 
 # Closures #
 
-<p align="justify">
 A closure is a closed language construct which has two parts, the code for the function
 and the environment that was current when we created the function. It is like an ML pair,
 just something with two parts however you can not access the parts of the pair separately.
-All you can do is call the function. Lets define a closure in Java.
-</p>
+All you can do is call the function. 
+
+It is like calling a taxi. You can only call the taxi and you take in the taxi and go where you want to go.
+When you hop in the taxi, you change the environment of it.
+
+# Example 1 #
+
 {% gist cgonul/3f3aa72db76e253d3df6 %} 
 
 And the output :
@@ -25,7 +29,7 @@ x : 3
 
 As it is mentioned all you can do is call the closure. You can not access it is environment but the
 function in it has the capability of changing this special environment. In Java you need an interface 
-to define a closure. In javascript it seems more natural.
+to define a closure. In javascript it is more natural.
 {% gist cgonul/acb017aaecbcf8fd55f4 %} 
 
 And the console output :
@@ -35,5 +39,3 @@ x : 2
 x : 3
 
 {% endhighlight %}
-
-In later posts I will mention about memoization, callbacks, thunks and streams which are all implementations of closures.
