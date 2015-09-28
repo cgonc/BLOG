@@ -62,12 +62,18 @@ Queues, sets, trees.
 # Question 4 #
 > Prints the content of an array of sixteen numbers , four numbers at a time, using just each. Now do the same with each_slice in Enumarable.
 
+__Answer__
+{% gist cgonul/2a16800cb4e0d9207108 %}
+
 # Question 5 #
 > Implements the Tree class using hashes.
 
 # Question 6 #
 > Write a simple grep that will print the lines of a file having any occurrences of a phrase anywhere in that line. You will need to do a simple regular expression
 match and read lines from a file. Include line numbers.
+
+__Answer__
+{% gist cgonul/90417f83bd10a990a958 %}
 
 # Question 7 #
 > Modify the csv application to support an each method to return a CsvRow object. Use method_missing on that CsvRow to return a value for the column for a giving heading.
@@ -83,6 +89,9 @@ lions, tigers
 csv = RubyCsv.new
 csv.each {|row| puts row.one} # should print lions
 {% endhighlight %}
+
+__Answer__
+{% gist cgonul/dcd7c08d7da5258c8a6c %}
 
 
 
